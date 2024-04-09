@@ -1,0 +1,45 @@
+server:
+ port: 8761
+ address: localhost
+ 
+spring:
+ application:
+    name: EurekaServer
+ 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /v1/eureka   
+  endpoint:
+    health:
+      show-details: ALWAYS
+      
+eureka:    
+  instance:
+    hostname: localhost
+    lease-expiration-duration-in-seconds: 90
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+        defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    maxThreadsForPeerReplication: 0  
+    expected-client-renewal-interval-seconds: 3
+    eviction-interval-timer-in-ms: 60000
+    renewal-percent-threshold: 0.85
+    renewal-threshold-update-interval-ms: 900000
+    
+logging:
+  file:
+    name: E:/Eurekaserverlogging/eurekaserver.log
+  level:
+    com:
+      eurekaserver: DEBUG
+    root: INFO
+    
+ribbon:
+  eureka:
+    enabled: false
